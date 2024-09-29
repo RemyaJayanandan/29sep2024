@@ -33,7 +33,7 @@ resource "aws_security_group" "ec2_sg" {
 # Launch Template for EC2 Instance
 resource "aws_launch_template" "ec2_launch_template" {
   name          = "ec2-launch-template"
-  image_id      = "ami-0c55b159cbfafe1f0"  # Choose AMI suitable for your region
+  image_id      = "ami-0522ab6e1ddcc7055"  # Choose AMI suitable for your region
   instance_type = "t2.micro"
   key_name      = var.key_name
 
