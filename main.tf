@@ -37,7 +37,8 @@ resource "aws_launch_template" "ec2_launch_template" {
   instance_type = "t2.micro"
   key_name      = var.key_name
 
-  user_data = <<-EOF
+# Base64 encode the user_data script
+  user_data = base64encode(<<-EOF
               #!/bin/bash
               sudo apt-get update -y
               sudo apt-get install -y apache2
@@ -45,7 +46,7 @@ resource "aws_launch_template" "ec2_launch_template" {
               sudo systemctl enable apache2
               echo "<h1>Hello, World from $(hostname -f)</h1>" > /var/www/html/index.html
               EOF
-
+              )
   network_interfaces {
     associate_public_ip_address = true
     security_groups             = [aws_security_group.ec2_sg.id]
